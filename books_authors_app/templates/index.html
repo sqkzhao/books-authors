@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Books and Authors</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <h1>Add a Book</h1>
+                <form action="/create_book" method="post">
+                    {% csrf_token %}
+                    <label>Title:</label>
+                    <input type="text" name="title" placeholder="Enter the book title" class="form-control form-group">
+                    <label>Description:</label>
+                    <input type="text" name="desc" placeholder="Enter the book description" class="form-control form-group">
+                    <input type="submit" value="Add" class="btn btn-primary">
+                </form>
+                <a href="/authors" class="btn btn-primary mt-3">View List of Authors</a>
+            </div>
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for book in all_books %}
+                            <tr>
+                                <td scope="row">{{book.id}}</td>
+                                <td>{{book.title}}</td>
+                                <td><a href="/books/{{book.id}}">View</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
